@@ -7,10 +7,13 @@ namespace ABCretailpoe1.Models
     {
         public int OrderId { get; set; }
         public int CustomerId { get; set; }
-        public DateTime OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; }
         public double TotalAmount { get; set; }
         public string? Status { get; set; }
-        
+
+        public string? File { get; set; }
+
+
         public int ProductId { get; set; }
 
         public string PartitionKey { get; set; } = string.Empty; // Default value to avoid null issues

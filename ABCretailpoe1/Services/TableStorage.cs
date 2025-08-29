@@ -112,5 +112,15 @@ namespace ABCretailpoe1.Services
         {
             await _orderTableClient.DeleteEntityAsync(partitionKey, rowKey);
         }
+
+        internal async Task<string?> GetProductAsync(string partitionKey, string rowKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal async Task<string?> GetCustomerAsync(string partitionKey, string rowKey)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

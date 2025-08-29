@@ -1,16 +1,16 @@
 ﻿@model ABCretailpoe1.Models.Order
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
 <h4>Order</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="OrderId" class="control-label"></label>
@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="TotalAmount" class="control-label"></label>
-                <input asp-for="TotalAmount" class="form-control" type="date"/>
+                <input asp-for="TotalAmount" class="form-control" />
                 <span asp-validation-for="TotalAmount" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -42,9 +42,23 @@
                 <input asp-for="ProductId" class="form-control" />
                 <span asp-validation-for="ProductId" class="text-danger"></span>
             </div>
-           
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="PartitionKey" class="control-label"></label>
+                <input asp-for="PartitionKey" class="form-control" />
+                <span asp-validation-for="PartitionKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RowKey" class="control-label"></label>
+                <input asp-for="RowKey" class="form-control" />
+                <span asp-validation-for="RowKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Timestamp" class="control-label"></label>
+                <input asp-for="Timestamp" class="form-control" />
+                <span asp-validation-for="Timestamp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

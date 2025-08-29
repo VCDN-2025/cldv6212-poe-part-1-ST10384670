@@ -1,4 +1,5 @@
-using ABCretailpoe1.Services;
+﻿using ABCretailpoe1.Services;
+using Azure.Storage.Blobs;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -17,8 +18,15 @@ builder.Services.AddSingleton<TableStorage>(sp =>
     return new TableStorage(connectionString);
 });
 
-
-
+builder.Services.AddSingleton<BlobStorage>(sp =>
+{
+    var connectionString = configuration.GetConnectionString("AzureBlobStorage");
+    if (string.IsNullOrEmpty(connectionString))
+    {
+        throw new InvalidOperationException("AzureBlobStorage connection string is not configured. Please check your appsettings.json.");
+    }
+    return new BlobStorage(connectionString, "product-images"); // "product-images" is your blob container name
+});
 
 var app = builder.Build();
 
@@ -26,7 +34,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

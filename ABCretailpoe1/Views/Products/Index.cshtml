@@ -26,7 +26,7 @@
                 @Html.DisplayNameFor(model => model.Stock)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
+                Image
             </th>
             
             <th></th>
@@ -49,7 +49,14 @@
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+					@if (!string.IsNullOrEmpty(item.ImageUrl))
+					{
+						<img src="@item.ImageUrl" alt="Product Image" style="max-width:100px; max-height:100px;" />
+					}
+					else
+					{
+						<span>No Image</span>
+					})
             </td>
           
             <td>

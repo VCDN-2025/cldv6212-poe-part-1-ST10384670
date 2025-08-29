@@ -7,10 +7,14 @@ namespace ABCretailpoe1.Controllers
     public class OrdersController : Controller
     {
         private readonly TableStorage _tableStorage;
+        private readonly QueueStorage _queueStorage;
 
-        public OrdersController(TableStorage tableStorage)
+        public OrdersController(TableStorage tableStorage, QueueStorage queueStorage)
+
+
         {
             _tableStorage = tableStorage;
+            _queueStorage = queueStorage;   
         }
 
         public async Task<IActionResult> Index()
