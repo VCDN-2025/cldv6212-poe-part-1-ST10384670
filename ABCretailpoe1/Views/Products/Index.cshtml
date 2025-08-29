@@ -1,70 +1,63 @@
-﻿@model IEnumerable<ABCretailpoe1.Models.Product>
+﻿@model IEnumerable<ABCretailpoe1.Models.Order>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Orders";
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="text-primary fw-bold">
+            <i class="bi bi-receipt"></i> Orders
+        </h1>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Create New
+        </a>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Stock)
-            </th>
-            <th>
-                Image
-            </th>
-            
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </td>
-            <td>
-					@if (!string.IsNullOrEmpty(item.ImageUrl))
-					{
-						<img src="@item.ImageUrl" alt="Product Image" style="max-width:100px; max-height:100px;" />
-					}
-					else
-					{
-						<span>No Image</span>
-					})
-            </td>
-          
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="card shadow-lg rounded-3">
+        <div class="card-body">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.CustomerId)</th>
+                        <th>@Html.DisplayNameFor(model => model.OrderDate)</th>
+                        <th>@Html.DisplayNameFor(model => model.TotalAmount)</th>
+                        <th>@Html.DisplayNameFor(model => model.Status)</th>
+                        <th>@Html.DisplayNameFor(model => model.ProductId)</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.CustomerId)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                            <td class="fw-bold text-success">R @Html.DisplayFor(modelItem => item.TotalAmount)</td>
+                            <td>
+                                @if (item.Status == "Completed")
+                                {
+                                    <span class="badge bg-success">Completed</span>
+                                }
+                                else if (item.Status == "Pending")
+                                {
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@item.Status</span>
+                                }
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductId)</td>
+                            <td class="text-center">
+                                @Html.ActionLink("Edit", "Edit", new { partitionKey = item.PartitionKey, rowKey = item.RowKey }, new { @class = "btn btn-sm btn-primary me-1" })
+                                @Html.ActionLink("Details", "Details", new { partitionKey = item.PartitionKey, rowKey = item.RowKey }, new { @class = "btn btn-sm btn-info me-1 text-white" })
+                                @Html.ActionLink("Delete", "Delete", new { partitionKey = item.PartitionKey, rowKey = item.RowKey }, new { @class = "btn btn-sm btn-danger" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

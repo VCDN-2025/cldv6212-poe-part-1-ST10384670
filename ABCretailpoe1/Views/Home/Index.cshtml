@@ -2,7 +2,63 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Welcome to ABC Retail</h1>
+        <p class="lead text-muted">
+            Manage your <strong>Customers</strong>, <strong>Products</strong>, and <strong>Orders</strong> with ease.
+        </p>
+        <a asp-controller="Products" asp-action="Index" class="btn btn-primary btn-lg rounded-pill shadow-sm mt-3">
+            🛒 View Products
+        </a>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row text-center g-4">
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 h-100 rounded-4">
+                <div class="card-body">
+                    <h3 class="text-primary">👤 Customers</h3>
+                    <p class="text-muted">Add, update, and manage your customers with complete details including contact and address information.</p>
+                    <a asp-controller="Customers" asp-action="Index" class="btn btn-outline-primary rounded-pill">
+                        Manage Customers
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 h-100 rounded-4">
+                <div class="card-body">
+                    <h3 class="text-success">📦 Products</h3>
+                    <p class="text-muted">Keep track of your product catalog with names, stock levels, images, and pricing.</p>
+                    <a asp-controller="Products" asp-action="Index" class="btn btn-outline-success rounded-pill">
+                        View Products
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 h-100 rounded-4">
+                <div class="card-body">
+                    <h3 class="text-warning">🧾 Orders</h3>
+                    <p class="text-muted">Easily create and monitor customer orders while keeping everything synced in Azure Table Storage.</p>
+                    <a asp-controller="Orders" asp-action="Index" class="btn btn-outline-warning rounded-pill">
+                        Manage Orders
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Extra Section -->
+    <div class="mt-5 text-center">
+        <h2 class="fw-bold">🚀 Why Choose ABC Retail?</h2>
+        <p class="text-muted">
+            A fast and reliable retail management system built with ASP.NET Core and Azure.
+            Stay organized, save time, and grow your business.
+        </p>
+    </div>
 </div>
