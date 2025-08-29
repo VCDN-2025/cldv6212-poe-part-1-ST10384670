@@ -7,9 +7,9 @@ var configuration = builder.Configuration;
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// BlobServiceClient registration
 builder.Services.AddSingleton(new BlobServiceClient(
     builder.Configuration.GetConnectionString("AzureBlobStorage")));
-
 
 // Configure Table Storage
 builder.Services.AddSingleton<TableStorage>(sp =>
@@ -22,6 +22,7 @@ builder.Services.AddSingleton<TableStorage>(sp =>
     return new TableStorage(connectionString);
 });
 
+// Configure Blob Storage
 builder.Services.AddSingleton<BlobStorage>(sp =>
 {
     var connectionString = configuration.GetConnectionString("AzureBlobStorage");
@@ -30,6 +31,17 @@ builder.Services.AddSingleton<BlobStorage>(sp =>
         throw new InvalidOperationException("AzureBlobStorage connection string is not configured. Please check your appsettings.json.");
     }
     return new BlobStorage(connectionString, "product-images"); // "product-images" is your blob container name
+});
+
+// **Register QueueStorage**
+builder.Services.AddSingleton<QueueStorage>(sp =>
+{
+    var connectionString = configuration.GetConnectionString("AzureQueueStorage");
+    if (string.IsNullOrEmpty(connectionString))
+    {
+        throw new InvalidOperationException("AzureQueueStorage connection string is not configured. Please check your appsettings.json or environment variables.");
+    }
+    return new QueueStorage(connectionString, "orders-queue"); // "orders-queue" is your queue name
 });
 
 var app = builder.Build();
